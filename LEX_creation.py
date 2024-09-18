@@ -12,22 +12,23 @@ import pandas as pd
 #   - The lexicon needs to be used as the exception dictionary.
 
 def main():
-    input_tg_dir = "D:\\OneDrive - Radboud Universiteit\\Letterster-annotations\\WebMAUS Aligner\\004_All round 1 data with LEX\\Input Files" # .txts of orthographic transcriptions
+    input_tg_dir = "D:\\OneDrive - Radboud Universiteit\\Letterster-annotations\\WebMAUS Aligner\\004_All round 1 data alignment with LEX\\Input Files"
+
     prepare_txt_files_for_G2P(input_tg_dir)
 
 
-    input_csv_XSAMPA_dir = "D:\\OneDrive - Radboud Universiteit\\Letterster-annotations\\WebMAUS Aligner\\004_All round 1 data alignment with LEX\\Letterster Lexicon" # .csvs containing X-SAMPA
-    # # Combining the output files from BAS G2P into a lexicon (.csv files)
-    SAMPA_csv_files = get_files_csv(input_csv_XSAMPA_dir)
-    print(f"\nNumber of files\t: {len(SAMPA_csv_files)}")
+    # input_csv_XSAMPA_dir = "D:\\OneDrive - Radboud Universiteit\\Letterster-annotations\\WebMAUS Aligner\\004_All round 1 data alignment with LEX\\Letterster Lexicon" # .csvs containing X-SAMPA
+    # # # Combining the output files from BAS G2P into a lexicon (.csv files)
+    # SAMPA_csv_files = get_files_csv(input_csv_XSAMPA_dir)
+    # print(f"\nNumber of files\t: {len(SAMPA_csv_files)}")
 
-    LEX_df = pd.DataFrame(columns=["orth/X-SAMPA"])
+    # LEX_df = pd.DataFrame(columns=["orth/X-SAMPA"])
 
-    LEX_df = process_files(SAMPA_csv_files, LEX_df)
-    print(LEX_df)
+    # LEX_df = process_files(SAMPA_csv_files, LEX_df)
+    # print(LEX_df)
 
-    output_LEX_file = "D:\\OneDrive - Radboud Universiteit\\Letterster-annotations\\WebMAUS Aligner\\004_All round 1 data alignment with LEX\\Letterster Lexicon\\Full Lexicon\\Letterster_LEX.csv"
-    export_LEX(LEX_df, output_LEX_file)
+    # output_LEX_file = "D:\\OneDrive - Radboud Universiteit\\Letterster-annotations\\WebMAUS Aligner\\004_All round 1 data alignment with LEX\\Letterster Lexicon\\Full Lexicon\\Letterster_LEX.csv"
+    # export_LEX(LEX_df, output_LEX_file)
 
 
 
