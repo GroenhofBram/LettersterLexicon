@@ -108,7 +108,7 @@ def simplify_consonants(row):
 def fix_single_consonants(trans_df):
     # Apply simplify_consonants to each row in the dataframe
     trans_df['orth/X-SAMPA'] = trans_df['orth/X-SAMPA'].apply(simplify_consonants)
-    
+    trans_df['orth/X-SAMPA'] = trans_df['orth/X-SAMPA'].replace('Yi', 'ui', regex=True)
     return trans_df
 
 def get_files_csv(input_csv_XSAMPA_dir):
