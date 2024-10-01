@@ -12,7 +12,7 @@ import pandas as pd
 #   - The lexicon needs to be used as the exception dictionary.
 
 def main():
-    user_goal = input("Please provide which step you want to do:/n/t(A) Convert .TextGrids to .txt files for G2P.\n\t(B) Use the X-SAMPA output .csvs from the WebMAUS G2P and combine them into one lexicon.")
+    user_goal = input("Please provide which step you want to do:\n\t(A) Convert .TextGrids to .txt files for G2P.\n\t(B) Use the X-SAMPA output .csvs from the WebMAUS G2P and combine them into one lexicon.\n\t")
 
     if user_goal == "A":
         input_tg_dir = "D:\\OneDrive - Radboud Universiteit\\Letterster-annotations\\WebMAUS Aligner\\004_All round 1 data alignment with LEX\\Input Files"
