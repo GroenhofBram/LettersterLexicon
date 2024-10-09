@@ -15,11 +15,11 @@ def main():
     user_goal = input("Please provide which step you want to do:\n\t(A) Convert .TextGrids to .txt files for G2P.\n\t(B) Use the X-SAMPA output .csvs from the WebMAUS G2P and combine them into one lexicon.\n\t")
 
     if user_goal == "A":
-        input_tg_dir = "D:\\OneDrive - Radboud Universiteit\\Letterster-annotations\\WebMAUS Aligner\\004_All round 1 data alignment with LEX\\Input Files"
+        input_tg_dir = "D:\\OneDrive - Radboud Universiteit\\Letterster-annotations\\WebMAUS Aligner\\005_All round 2 data alignment with LEX\\Input Files"
         prepare_txt_files_for_G2P(input_tg_dir)
 
     elif user_goal == "B":
-        input_csv_XSAMPA_dir = "D:\\OneDrive - Radboud Universiteit\\Letterster-annotations\\WebMAUS Aligner\\004_All round 1 data alignment with LEX\\Letterster Lexicon" # .csvs containing X-SAMPA
+        input_csv_XSAMPA_dir = "D:\\OneDrive - Radboud Universiteit\\Letterster-annotations\\WebMAUS Aligner\\005_All round 2 data alignment with LEX\\Letterster Lexicon" # .csvs containing X-SAMPA
         # # Combining the output files from BAS G2P into a lexicon (.csv files)
         SAMPA_csv_files = get_files_csv(input_csv_XSAMPA_dir)
         print(f"\nNumber of files\t: {len(SAMPA_csv_files)}")
@@ -29,7 +29,7 @@ def main():
         LEX_df = process_files(SAMPA_csv_files, LEX_df)
         print(LEX_df)
 
-        output_LEX_file = "D:\\OneDrive - Radboud Universiteit\\Letterster-annotations\\WebMAUS Aligner\\004_All round 1 data alignment with LEX\\Letterster Lexicon\\Full Lexicon\\Letterster_LEX.csv"
+        output_LEX_file = "D:\\OneDrive - Radboud Universiteit\\Letterster-annotations\\WebMAUS Aligner\\005_All round 2 data alignment with LEX\\Letterster Lexicon\\Full Lexicon\\Letterster_LEX.csv"
         export_LEX(LEX_df, output_LEX_file)
 
 
@@ -43,9 +43,19 @@ def process_files(files, LEX_df):
         curr_file_trans_df.columns = ["orth/X-SAMPA"]
         # Apply the fix_single_consonants function here to simplify the consonants
         curr_file_trans_df = fix_single_consonants(curr_file_trans_df)
-        
+
+        curr_file_trans_df["orth/X-SAMPA"] = curr_file_trans_df["orth/X-SAMPA"].str.replace("E s s e: h a:", "s x")
+        curr_file_trans_df["orth/X-SAMPA"] = curr_file_trans_df["orth/X-SAMPA"].str.replace("E s t e:", "s t")
+        curr_file_trans_df["orth/X-SAMPA"] = curr_file_trans_df["orth/X-SAMPA"].str.replace(";G e:", ";x e:")
+        curr_file_trans_df["orth/X-SAMPA"] = curr_file_trans_df["orth/X-SAMPA"].str.replace("E s E n", "s n")
+        curr_file_trans_df["orth/X-SAMPA"] = curr_file_trans_df["orth/X-SAMPA"].str.replace("E s E l", "s l")
+        curr_file_trans_df["orth/X-SAMPA"] = curr_file_trans_df["orth/X-SAMPA"].str.replace("E s p e:", "s p")
+
         LEX_df = pd.concat([LEX_df, curr_file_trans_df], ignore_index=True)
+
+
     LEX_df = LEX_df.drop_duplicates()
+    print(LEX_df)
     return LEX_df
 
 def simplify_consonants(row):
